@@ -1,5 +1,138 @@
 <!-- We include the sidebar as it is shared across two screens. -->
-<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+
 
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
 not support it in free version) and list all the dishes that match the search. -->
+
+
+
+<div class="row">
+
+
+
+	<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
+
+
+
+
+<div id="" class="col-sm-8 selector"> <!-- whole selector area -->  
+
+
+	
+	<div id="SelectorFilter">
+
+
+			<div class="col-sm-12 selector-menu">  
+			    		<h2> <small id="selecttext"> SELECT DISH </h2>
+			    		<hr>
+
+			    		<div id="" class="row"> <!-- selector menu keywords and accordion --> 
+						
+						  <div class="col-sm-6"> 
+						    <div class="input-group">
+						      <input ng-model="query" id="FilterSearch" type="text" class="form-control" placeholder="Enter keywords..">
+						      <span  class="input-group-btn">
+						        <button ng-click="search(query)" id="SearchButton" class="btn btn-default" type="button"> 
+						        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>  
+
+						       </button> 
+						     </span>
+						    </div><!-- /input-group -->
+						  </div><!-- /.col-sm-6 --> 
+				
+
+					    	<div class="col-sm-6">
+
+					    		<select id="FilterMenu" class="form-control">
+					    		<option value="All">All</option>
+							    <option value="Main">Main</option>
+							    <option value="Desserts">Dessert</option>
+							    <option value="Appetizers">Starters</option> 
+							    <option value="Drinks">Drinks</option>
+							    <option value="Other">Other</option>
+							</select>
+					    		
+					    	</div>
+
+    	
+			    </div> <!-- selector menu keywords and accordion END -->
+
+
+	</div>  
+
+	</div>  
+
+
+
+	<div class="SelectorSpinner">
+
+		<div class="spinner"> 
+	    <img src="images/ajax-loader.gif" alt="Loading..."/> 
+		</div> 
+
+
+	</div> 
+
+	
+
+<!-- 	<div id="SelectorDishes"> -->
+
+			<div ng-repeat="dish in dishes" class="col-sm-3 ">" 
+										<div class="panel panel-warning "> 
+								  			<div class="panel-heading DishSelectorPanels">   {{dish.Title}}
+
+								  			<!-- <span><button id=""  "AddDish"  id  ""class="button button-default glyphicon glyphicon-plus AddButton"></button></span>
+								  			
+								  			<span><button id=""  id  ""class="button button-default glyphicon glyphicon glyphicon-plus AddButton DishInfoButton"></button></span> -->
+
+
+								  			</div>  
+								  			<div  class="panel-body"> 
+								  					<a ng-href="#/dish/{{dish.RecipeID}}" class="btn btn-group btn-group-lg  center-block pull-right" role="group" id="">
+													<type="button" class="btn btn-default btn-custom"> SELECT </a> 
+								  				<div href="#dish" class="col-xs-12"> 
+
+								  				 
+
+								  				<div class="hovereffect">
+								  							<img ng-src="{{dish.ImageURL}}" class="img-rounded DishInfoButton" height="200" width="100%" ></img> 
+												        
+												            <div id="" class="overlay DishInfoButton"> 
+												               	<p>
+																	<p>SELECT</p> 
+																</p> 
+
+												                <h2></h2> 
+																
+												            </div>
+												    </div>
+												   </div>
+
+								  				
+
+								  			</div>
+								  			<div id ="DishObject" class="panel-footer">  {{dish.Category}}
+								  			</div> 
+										</div>
+				</div>
+
+
+
+
+
+			<!-- 	</div>  -->
+
+		<!-- 	</div>   -->
+
+	
+
+	 <!-- end of row -->
+
+
+
+
+
+	
+
+
+

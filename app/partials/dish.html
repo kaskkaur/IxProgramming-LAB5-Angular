@@ -17,13 +17,13 @@ Instructions, Ingredients and total cost. -->
 
 			    	 <div class="col-sm-6 selector-method DishInfo" id="Meatballs"> 
 
-						 	<h2> dish.Title  </h2>
-						 	<img class="img-thumbnail" width="250" height="250" src=""></img> <!-- dish.ImageURL -->
+						 	<h2> {{dish.Title}}  </h2>
+						 	<img class="img-thumbnail" width="250" height="250" ng-src="{{dish.ImageURL}}"></img> <!-- dish.ImageURL -->
 
-						 	<p>  dish.Description  </p>
-						 	<h3>  Instructions  </h3> 
-						 	<h4>  Total preparation time:"  " "  dish.TotalMinutes   " "  "minutes"  "</h4>
-						 	<p>  dish.Instructions  </p>
+						 	<p>  {{dish.Description}}  </p>
+						 	<h3>  Instructions </h3> 
+						 	<h4>  Total preparation time: {{dish.TotalMinutes}} minutes</h4>
+						 	<p>  {{dish.Instructions}}  </p>
  	
 			    	</div>
 
@@ -33,7 +33,7 @@ Instructions, Ingredients and total cost. -->
 			    			<div class="col-sm-12">
 
 			    			<div class="col-sm-6"> 
-			    				<h3>  dish.Title  " "  "for</h3>
+			    				<h3>  {{dish.Title}} for <!-- {{getNumberOfGuests()}} --> </h3>
 
 			    			</div> 
 
@@ -43,7 +43,7 @@ Instructions, Ingredients and total cost. -->
 			    				
 			    				<span class="input-group"> 
 			    				<br> 	
-								<h3>  model.getNumberOfGuests()  "</h3>
+								<h3>  {{getNumberOfGuests()}} </h3>
 
 								</span> 
 
@@ -65,7 +65,13 @@ Instructions, Ingredients and total cost. -->
 				    			
 				    			  <table class="table table-hover recipe-DishView" id="DishViewMenu">
 
-				    			  	
+				    			<tr ng-repeat="value in dish.Ingredients"> 
+								<td> {{value.MetricDisplayQuantity * getNumberOfGuests()}}  </td> 
+								<td>  {{value.MetricUnit}}   </td> 
+								<td>  {{value.Name}}   </td> 
+								<td class="pull-left">   {{value.MetricDisplayQuantity}}   </td> 
+								<td> SEK </td>
+								</tr>
 
 				    			  </table>
 
@@ -89,14 +95,14 @@ Instructions, Ingredients and total cost. -->
 			    			</div> <!-- end of lasagne recipe -->
 
 			    			<div class="col-sm-12">
-			    			<h3>Item total:"  "   "   model.getTotalDishPriceView(id)    "  "  "SEK"   "</h3>
+			    			<h3>Item total: {{getTotalDishPriceView()}}  SEK  </h3>
 
 			    			<a href="#search" class="btn btn-group btn-group-md" role="group" id="DishBackToSelector"> 
 							<type="button" class="btn btn-default btn-custom"> Back to Select Dish </a>
 
 							<span id="ConfirmButtonBox"> 
 							<a class="btn-group btn-group-md" role="group" id="DishConfirmDish">
-							<type="button" class="btn btn-default btn-success ConfirmDishButton"> Add to menu </button> 
+							<type="button" ng-click="addDishToMenu()" class="btn btn-default btn-success ConfirmDishButton"> Add to menu </button> 
 							</a>
 							</span> 
 			    			<hr>

@@ -88,8 +88,8 @@ not support it in free version) and list all the dishes that match the search. -
 
 								  			</div>  
 								  			<div  class="panel-body"> 
-								  					<a ng-href="#/dish/{{dish.RecipeID}}" class="btn btn-group btn-group-lg  center-block pull-right" role="group" id="">
-													<type="button" class="btn btn-default btn-custom"> SELECT </a> 
+								  					<a ng-href="#/dish/{{dish.RecipeID}}"  class="btn btn-group btn-group-lg  center-block pull-right" role="group" id="">
+													<type="button" ng-click="getDishData" class="btn btn-default btn-custom"> SELECT </a> 
 								  				<div href="#dish" class="col-xs-12"> 
 
 								  				 
@@ -111,7 +111,7 @@ not support it in free version) and list all the dishes that match the search. -
 								  				
 
 								  			</div>
-								  			<div id ="DishObject" class="panel-footer">  {{dish.Category}}
+								  			<div id ="DishObject" class="panel-footer">  {{dish.Subcategory}}
 								  			</div> 
 										</div>
 				</div>

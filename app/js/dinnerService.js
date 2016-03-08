@@ -11,6 +11,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   var numberOfGuests = 1;
 
   this.DishDataArray = [];
+  this.SelectorDishesArray = [];
 
 
   this.price = 1;
@@ -31,6 +32,8 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
 
   this.setNumberOfGuests = function(num) {
+
+    // alert("setguests");
     
     if(num > 1) {
 
@@ -47,6 +50,9 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   // should return 
   this.getNumberOfGuests = function() {
+
+
+    // alert("getGuests")
     
 
     // alert('GETNumOfGuests initiated')
@@ -186,9 +192,10 @@ this.getTotalDishPrice = function(id) {
 
 this.getTotalDishPriceView = function() {
   
+  
   currentDish = this.DishDataArray;
   ing = currentDish.Ingredients;
-  console.log(currentDish.Ingredients);
+  // console.log(currentDish.Ingredients);
 
   var sumArr = [] //summation array
 
@@ -202,7 +209,7 @@ this.getTotalDishPriceView = function() {
 
 
 
-  console.log(sumArr);
+  // console.log(sumArr);
 
 
   var total = 0; 
@@ -212,8 +219,8 @@ this.getTotalDishPriceView = function() {
     }
 
     var roundedTotal = Math.round(total);
-    console.log(total);
-    console.log(roundedTotal);
+    // console.log(total);
+    // console.log(roundedTotal);
     return roundedTotal;
 }
 
@@ -224,6 +231,8 @@ this.getTotalDishPriceView = function() {
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
 this.addDishToMenu = function(id) {
+
+  // alert("service adddish")
 
   for (var j = 0; j < menu.length; j++) {
       var obj = menu[j]
@@ -288,8 +297,8 @@ this.addDishToMenu = function(id) {
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
   //if you don't pass any filter all the dishes will be returned
 
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:10,api_key:'0OV23011kU7B3VVVgxTTTIfdNXeTI3us'});
-  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'0OV23011kU7B3VVVgxTTTIfdNXeTI3us'}); 
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:10,api_key:'66J8l00npnHHZcCNLRhxkfW1OHxbojy4'});
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'66J8l00npnHHZcCNLRhxkfW1OHxbojy4'}); 
 
 
   this.getAllDishes = function (type,filter) {

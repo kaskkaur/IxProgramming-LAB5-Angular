@@ -20,7 +20,7 @@ this with Total price of the menu -->
 							<span>
 								<div class="input-group">
 								  <span class="input-group-addon">#</span>
-								  <input  type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)" class="form-control" aria-label="Amount" id="numberOfGuests">
+								  <input min="1"  type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuests(numberOfGuests)" class="form-control" aria-label="Amount" id="numberOfGuests">
 								
 								  <span class="input-group-addon">People</span>
 								</div>
@@ -43,7 +43,15 @@ this with Total price of the menu -->
 							  	<th> Price SEK </th>
 						</table>
 
-						<table class="table table-hover" style="width:100%"  id="SideBarItems">
+						<table  class="table table-hover" style="width:100%"  id="SideBarItems">
+
+							<tr ng-repeat="dish in menu"> 
+								<td>  <a ng-click="removeDish(dish.RecipeID)" class="btn btn-default btn-group-xs glyphicon glyphicon-remove RemoveButton" id=""  "RemoveDish"    ""></a>  </td> 
+								<td>   {{dish.Title}}  </td>
+								<td>  <b>  {{getTotalDishPrice()}}  </b>   </td> 
+
+
+								</tr>
 							    
 							  
 						</table>
@@ -52,7 +60,7 @@ this with Total price of the menu -->
 				<div class="total">
 						<div class="input-group">
 							   <span id="" class="input-group-addon TotalColor">Total</span>
-							  <input  id="MenuTotal" type="text" class="form-control" aria-label="Amount">
+							  <input ng-value="getTotalMenuPrice()"   id="MenuTotal" type="text" class="form-control" aria-label="Amount">
 							   <span class="input-group-addon TotalColor">SEK</span>
 
 						</div>

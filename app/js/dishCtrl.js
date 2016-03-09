@@ -6,8 +6,8 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
   // $routingParams.paramName
   // Check the app.js to figure out what is the paramName in this case
  		
-
- 		$scope.numberOfGuests = Dinner.getNumberOfGuests();
+  		$scope.menu = Dinner.menu;
+		$scope.numberOfGuests = Dinner.getNumberOfGuests();
 		
  		$scope.getNumberOfGuests = function() {
 		    return Dinner.getNumberOfGuests();
@@ -34,9 +34,12 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
 
 $scope.addDishToMenu = function (id) {
   		// alert("addDish ctrl")
+  		id = $routeParams.dishId;
+  		console.log(id);
 
   		Dinner.addDishToMenu(id);
-  		$scope.menu = Dinner.menu;
+
+  		
 
   	}
 

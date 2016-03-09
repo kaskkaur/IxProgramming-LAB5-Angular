@@ -297,8 +297,8 @@ this.addDishToMenu = function(id) {
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
   //if you don't pass any filter all the dishes will be returned
 
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:10,api_key:'66J8l00npnHHZcCNLRhxkfW1OHxbojy4'});
-  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'66J8l00npnHHZcCNLRhxkfW1OHxbojy4'}); 
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:10,api_key:'sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox'});
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox'}); 
 
 
   this.getAllDishes = function (type,filter) {

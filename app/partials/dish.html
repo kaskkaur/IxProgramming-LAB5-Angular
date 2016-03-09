@@ -69,7 +69,7 @@ Instructions, Ingredients and total cost. -->
 								<td> {{value.MetricDisplayQuantity * getNumberOfGuests()}}  </td> 
 								<td>  {{value.MetricUnit}}   </td> 
 								<td>  {{value.Name}}   </td> 
-								<td class="pull-left">   {{value.MetricDisplayQuantity}}   </td> 
+								<td class="pull-left">   {{value.MetricDisplayQuantity * getNumberOfGuests()}}   </td> 
 								<td> SEK </td>
 								</tr>
 

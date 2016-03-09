@@ -19,7 +19,7 @@ $scope.removeDish = function(id) {
 	// alert("remove")
 
     Dinner.removeDishFromMenu(id);
-    $scope.menu = Dinner.getFullMenu();
+    // $scope.menu = Dinner.getFullMenu();
 
   }
 
@@ -39,15 +39,15 @@ $scope.getTotalMenuPrice = function() {
 
 
 
-  $scope.menu = Dinner.getFullMenu();
+  //$scope.menu = Dinner.getFullMenu();
 
 	
+$scope.fullMenu = function() {
+  console.log(Dinner.getFullMenu());
+         return Dinner.getFullMenu();
+       }
 
 
-
-// $scope.getFullMenu = function() {
-//     return Dinner.getFullMenu();
-//   }
 
 
   // TODO in Lab 5: Implement the methods to get the dinner menu

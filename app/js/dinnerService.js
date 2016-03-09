@@ -3,16 +3,36 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
- 
-  
+dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   self = this;
-  
+   this.DishDataArray = [];
+   var menu = [];
+   var menuData = [];
+
+
   var numberOfGuests = 1;
 
-  this.DishDataArray = [];
-  this.SelectorDishesArray = [];
 
+ if ( $cookieStore.get("numGuests") > 1) {
+  
+    numberOfGuests = $cookieStore.get("numGuests");
+    // $cookieStore.put("numGuests", numberOfGuests)
+    
+  }
+
+    else {
+
+      numberOfGuests = 1;
+
+    }
+
+
+ 
+  // $cookieStore.put(numberOfGuests);
+  $cookieStore.put("numGuests", numberOfGuests);
+
+
+  this.SelectorDishesArray = [];
 
   this.price = 1;
   // this.ingPrice = 1;
@@ -23,13 +43,6 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   // this.SearchString = "";
 
-  this.getDishType = function() {
-  
-  
-  return DishType;
-  
-  }
-
 
   this.setNumberOfGuests = function(num) {
 
@@ -39,10 +52,12 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
 
       numberOfGuests = num;
+      $cookieStore.put("numGuests", numberOfGuests);
 
     } else {
 
       numberOfGuests = 1;
+      $cookieStore.put("numGuests", numberOfGuests);
     }
 
 
@@ -52,35 +67,32 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   this.getNumberOfGuests = function() {
 
 
-    // alert("getGuests")
+   var guests = $cookieStore.get("numGuests"); 
+   console.log(guests);
+    return guests
     
-
-    // alert('GETNumOfGuests initiated')
-    
-    //console.log(numberOfGuests)
-    return numberOfGuests;
     
 
   }
 
   //Returns the dish that is on the menu for selected type 
-  this.getSelectedDish = function(type) {
+  // this.getSelectedDish = function(type) {
 
-    // alert('SELECTdishfunc initiated');
+  //   // alert('SELECTdishfunc initiated');
 
-    var TypeArray = [] // we create an empty array to store the specific type dishes
+  //   var TypeArray = [] // we create an empty array to store the specific type dishes
 
-    for (var key = 0; key < menu.length; key++) {
-         if (menu[key].type === type){ // check if type matches
-          var obj = menu[key]
-          TypeArray.push(obj); // place to array
+  //   for (var key = 0; key < menu.length; key++) {
+  //        if (menu[key].type === type){ // check if type matches
+  //         var obj = menu[key]
+  //         TypeArray.push(obj); // place to array
 
-          }
+  //         }
   
-       }
-      console.log(TypeArray);
-      return TypeArray;
-  }
+  //      }
+  //     console.log(TypeArray);
+  //     return TypeArray;
+  // }
 
 
 
@@ -103,22 +115,22 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
         
   
   //Returns all ingredients for all the dishes on the menu.
-  this.getAllIngredients = function() {
+  // this.getAllIngredients = function() {
       
-      IngredientsArray = []
+  //     IngredientsArray = []
 
-      for(var i = 0; i < menu.length; i++) {
-        var obj = menu[i];
-        var DishIngredients = obj.ingredients
+  //     for(var i = 0; i < menu.length; i++) {
+  //       var obj = menu[i];
+  //       var DishIngredients = obj.ingredients
 
-       IngredientsArray.push(DishIngredients)
+  //      IngredientsArray.push(DishIngredients)
 
 
-  }
+  // }
 
-  console.log(IngredientsArray);
-  return IngredientsArray;
-  }
+  // console.log(IngredientsArray);
+  // return IngredientsArray;
+  // }
 
   //Returns the total price of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function() {
@@ -256,7 +268,15 @@ this.addDishToMenu = function(id) {
 
 
 
+
+
+  // $cookieStore.put("MenuCookie", this.DishDataArray.RecipeID);
+  // var MenuCookie = $cookieStore.get("MenuCookie")
+
   menu.push(this.DishDataArray)
+  menuData.push(this.DishDataArray.RecipeID)
+  console.log("MENU DATA ADD", menuData);
+  $cookieStore.put("menuCookie", menuData);
   console.log(menu);
 
 }
@@ -289,6 +309,20 @@ this.addDishToMenu = function(id) {
         };
 
       };
+
+      menuData = [];
+      for(var i in menu) {
+        menuData.push(menu[i].RecipeID);
+
+
+      }
+      
+
+
+
+  console.log("MENU DATA RM", menuData);
+
+      $cookieStore.put("menuCookie", menuData);
   }
   
 
@@ -297,133 +331,161 @@ this.addDishToMenu = function(id) {
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
   //if you don't pass any filter all the dishes will be returned
 
-  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:10,api_key:'sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox'});
-  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'sV1fPGQKrO0b6oUYb6w9kLI8BORLiWox'}); 
+  this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:10,api_key:'H9n1zb6es492fj87OxDtZM9s5sb29rW3'});
+  this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:'H9n1zb6es492fj87OxDtZM9s5sb29rW3'}); 
 
 
-  this.getAllDishes = function (type,filter) {
-    // || (filterKey != "" && typeof filterKey != "undefined"))
-    console.log(type);
-    self = this;
-    dishType = type;
+  // this.getAllDishes = function (type,filter) {
+  //   // || (filterKey != "" && typeof filterKey != "undefined"))
+  //   console.log(type);
+  //   self = this;
+  //   dishType = type;
 
-      var typeString = "";
-      var RecipeArray = [];
-      var searchString = "";
-      filterKey = filter;
-      console.log(filterKey)
+  //     var typeString = "";
+  //     var RecipeArray = [];
+  //     var searchString = "";
+  //     filterKey = filter;
+  //     console.log(filterKey)
 
-    if(filterKey != "" && typeof filterKey != "undefined")  {
-      // alert("we not empty")
+  //   if(filterKey != "" && typeof filterKey != "undefined")  {
+  //     // alert("we not empty")
 
-      searchString = "title_kw=" + filterKey + "&"
+  //     searchString = "title_kw=" + filterKey + "&"
          
               
-      } else {
+  //     } else {
 
-        searchString = "";
-      }
-
-
-    if (dishType === "All") {
-
-      typeString = "";
-
-    } else {
-
-      typeString = "include_primarycat=" + dishType
+  //       searchString = "";
+  //     }
 
 
-    }
+  //   if (dishType === "All") {
 
-    console.log(DishType)
+  //     typeString = "";
 
-      paging = "&pg=6&rpp=10"
+  //   } else {
 
-      var apiKey = "66J8l00npnHHZcCNLRhxkfW1OHxbojy4";
-      // var recipeID = 196149;
-      var url = "http://api.bigoven.com/recipes?" + searchString + typeString + paging + "&api_key=" + apiKey;
+  //     typeString = "include_primarycat=" + dishType
 
-      console.log(url);
+
+  //   }
+
+  //   console.log(DishType)
+
+  //     paging = "&pg=6&rpp=10"
+
+  //     var apiKey = "66J8l00npnHHZcCNLRhxkfW1OHxbojy4";
+  //     // var recipeID = 196149;
+  //     var url = "http://api.bigoven.com/recipes?" + searchString + typeString + paging + "&api_key=" + apiKey;
+
+  //     console.log(url);
       
-      $.ajax({
-               type: "GET",
-               dataType: 'json',
-               cache: false,
-               url: url,
-               context: this,
-               success: function (data) {
+  //     $.ajax({
+  //              type: "GET",
+  //              dataType: 'json',
+  //              cache: false,
+  //              url: url,
+  //              context: this,
+  //              success: function (data) {
 
-                console.log(data);
-                results = data.Results;
+  //               console.log(data);
+  //               results = data.Results;
 
                
-                 RecipeArray.push(data);
+  //                RecipeArray.push(data);
                 
                       
-                  }
+  //                 }
 
-               });
+  //              });
   
-    console.log(RecipeArray);
-    // return RecipeArray;
-  }
+  //   console.log(RecipeArray);
+  //   // return RecipeArray;
+  // }
 
 
-  this.getDishData = function (id) { 
-        // alert("DishdataFunc")
+  // this.getDishData = function (id) { 
+  //       // alert("DishdataFunc")
 
     
-              var apiKey = "66J8l00npnHHZcCNLRhxkfW1OHxbojy4";
+  //             var apiKey = "66J8l00npnHHZcCNLRhxkfW1OHxbojy4";
               
-              console.log(id + "HEY Im rec value")
-                  recipeID = id;
+  //             console.log(id + "HEY Im rec value")
+  //                 recipeID = id;
 
-                  var recipeURL = "http://api.bigoven.com/recipe/" + recipeID + "?api_key=" + apiKey;
+  //                 var recipeURL = "http://api.bigoven.com/recipe/" + recipeID + "?api_key=" + apiKey;
 
-                  $.ajax({
-                       type: "GET",
-                       dataType: 'json',
-                       cache: false,
-                       url: recipeURL,
-                       context: this,
-                       success: function (recipeData) {
+  //                 $.ajax({
+  //                      type: "GET",
+  //                      dataType: 'json',
+  //                      cache: false,
+  //                      url: recipeURL,
+  //                      context: this,
+  //                      success: function (recipeData) {
                       
 
                        
                       
-                          }
+  //                         }
 
-                       });
+  //                      });
 
-  }
+  // }
   
 
-  //function that returns a dish of specific ID
-  this.getDish = function (id) {
+  // //function that returns a dish of specific ID
+  // this.getDish = function (id) {
 
-    for(key in dishes){
-      if(dishes[key].id == id) {
+  //   for(key in dishes){
+  //     if(dishes[key].id == id) {
  
         
-        return dishes[key];
+  //       return dishes[key];
 
 
-      }
+  //     }
 
 
-    }
+  //   }
     
 
     
-  }
+  // }
 
 
-  var menu = [    
-  ];
+  
+
+ this.loadMenu = function() {
+  // alert("loadmenu")
+
+  var menuCookie = $cookieStore.get("menuCookie");
+  console.log("MENU COOKIE!", menuCookie);
+
+  if (menuCookie) {
+    for (var i in menuCookie) {
+      console.log(menuCookie[i]);
 
 
 
+
+
+      this.Dish.get({id: menuCookie[i]},function(data){
+
+          menu.push(data);
+
+         console.log(data);
+
+     });
+
+
+      
+    };
+
+  };
+
+ }
+
+this.loadMenu();
 
   // TODO in Lab 5: Add your model code from previous labs
   // feel free to remove above example code

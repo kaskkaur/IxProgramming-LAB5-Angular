@@ -13,7 +13,10 @@ $scope.dishes = Dinner.SelectorDishesArray;
 	   	
 
 	   	Dinner.DishSearch.get({title_kw:query},function(data){
+	     	
 	     Dinner.SelectorDishesArray = data.Results;
+
+	     
 	     $scope.dishes = Dinner.SelectorDishesArray;
 	     
 	     $scope.status = "Showing " + data.Results.length + " results";

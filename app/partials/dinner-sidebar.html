@@ -45,7 +45,7 @@ this with Total price of the menu -->
 
 						<table  class="table table-hover" style="width:100%"  id="SideBarItems">
 
-							<tr ng-repeat="dish in menu"> 
+							<tr ng-repeat="dish in fullMenu()"> 
 								<td>  <a ng-click="removeDish(dish.RecipeID)" class="btn btn-default btn-group-xs glyphicon glyphicon-remove RemoveButton" id=""  "RemoveDish"    ""></a>  </td> 
 								<td>   {{dish.Title}}  </td>
 								<td>  <b>  {{getTotalDishPrice(dish.RecipeID)}}  </b>   </td> 
@@ -65,7 +65,7 @@ this with Total price of the menu -->
 
 						</div>
 
-						<a class="btn-group btn-group-md btn-custom" role="group" id="ConfirmButton">
+						<a ng-href="#dinner_overview" class="btn-group btn-group-md btn-custom" role="group" id="ConfirmButton">
 						<type="button" class="btn btn-default btn-custom"> Confirm dinner
 				
 						</a>

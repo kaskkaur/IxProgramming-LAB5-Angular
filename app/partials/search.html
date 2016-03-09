@@ -21,7 +21,7 @@ not support it in free version) and list all the dishes that match the search. -
 
 
 			<div class="col-sm-12 selector-menu">  
-			    		<h2> <small id="selecttext"> SELECT DISH </h2>
+			    		<h2> <small id="selecttext"> SELECT DISH </h2> <span class="LoadingStatus"><h3>{{status}}</h2></span>
 			    		<hr>
 
 			    		<div id="" class="row"> <!-- selector menu keywords and accordion --> 
@@ -37,6 +37,8 @@ not support it in free version) and list all the dishes that match the search. -
 						     </span>
 						    </div><!-- /input-group -->
 						  </div><!-- /.col-sm-6 --> 
+
+						 
 				
 
 					    	<div class="col-sm-6">
@@ -73,7 +75,8 @@ not support it in free version) and list all the dishes that match the search. -
 
 <!-- 	<div id="SelectorDishes"> -->
 
-			<div ng-repeat="dish in dishes" class="col-sm-3 ">" 
+
+			<div ng-repeat="dish in dishes" class="col-sm-3 ">
 										<div class="panel panel-warning "> 
 								  			<div class="panel-heading DishSelectorPanels">   {{dish.Title}}
 

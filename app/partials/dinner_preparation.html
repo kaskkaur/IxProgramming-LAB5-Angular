@@ -1,63 +1,67 @@
+	 
+
  
+ <div class="col-sm-12"> <!-- whole selector area -->
 
+	
 
-
- <div class="row"> 
-
- <ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
-
- <div class="col-md-12 selector-menu container"> 
+				<div class="col-md-12 selector-menu"> 
 			    		 
-			    			<div class="col-md-6"> 
+			    				<div class="col-md-6"> 
 
-						    		<h2 id="MyDinnerFor"> My dinner for"  " <span id="GuestNumberPrep"></span> " "  "people" </h2> 	
+						    		<h2 id="MyDinnerFor"> My dinner for {{getNumberOfGuests()}} people </h2> 	
 
-							</div>
+								</div>
 
 							
 
 					
-							<div class="col-md-6"> 
+								<div class="col-md-6"> 
 
-								<a class="btn btn-group btn-group-md pull-right center-block" role="group" id="BackToSelector" >
-									<type="button" class="btn btn-default btn-custom OverviewBackToSelector"> "Go back and edit dinner"</a> 
-							</div>
+									<a href="#search" class="btn btn-group btn-group-md pull-right center-block" role="group" id="BackToSelector" >
+										<type="button" class="btn btn-default btn-custom OverviewBackToSelector"> Go back and edit dinner</a> 
+								</div>
 
-			    	</div>
+			    </div>
 
 
- 
- <div id="" class="col-md-8 selector"> <!-- whole selector area -->
+	
+			   <div ng-repeat="value in fullMenu()" class="row">
+				<div  class="col-sm-4">
+									
+								
 
-	<div id="PreparationHead"></div>
+								<div class="preparation-image">
+									
+									<img class="img-thumbnail" width="100%" height="100%" ng-src="{{value.ImageURL}}"></img>
+										
+								</div>
 
-	<div id="PreparationItems"></div> 
+										
+										
+				</div>
+
+								
+				<div  class="col-sm-8">
+
+									<div class="preparation-image">
+									<h3> {{value.Title}} </h3> {{value.Instructions}}
+
+									</div>
+
+	
+				</div>
+
+			</div>
+
+
+
+
+			</div> 
 
 
 	
 
 	</div> 
 							
-							<div class="col-sm-4">
-									
-								<div class="preparation-image">
-									
-									<img class="img-thumbnail" width="100%" height="100%" src="" DinnerPrepList[i].ImageURL ""></img>
-										
-								</div>
-
-										
-										
-							</div>
-
-								<div class="col-sm-8">
-
-									<div class="preparation-image">
-									<h3> DinnerPrepList[i].Title </h3> DinnerPrepList[i].Instructions 
-
-									</div>
-
-	
-								</div>
-
-								</div>
+							

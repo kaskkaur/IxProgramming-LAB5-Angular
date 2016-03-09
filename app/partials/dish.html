@@ -8,12 +8,12 @@ Instructions, Ingredients and total cost. -->
 
 	<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
-<div class="col-sm-8 selector"> <!-- whole selector area -->
+<div ng-show="show" ng-hide="hide" class="col-sm-8 selector"> <!-- whole selector area -->
 
 			    <div class="container">
 
 			    	<div class="row">
-			    	<div class="DishSpinner"></div>
+			    	<div class="DishSpinner">{{status}}</div>
 
 			    	 <div class="col-sm-6 selector-method DishInfo" id="Meatballs"> 
 
@@ -61,6 +61,8 @@ Instructions, Ingredients and total cost. -->
 			    			
 	
 						  	<div class="col-sm-12 recipe-DishView"> 
+
+						  		{{status}}
 
 				    			
 				    			  <table class="table table-hover recipe-DishView" id="DishViewMenu">

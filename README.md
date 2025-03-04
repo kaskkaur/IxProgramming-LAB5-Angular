@@ -1,4 +1,4 @@
-Interaction Programing - Lab assignment - HTML
+Interaction Programing - Lab assignment
 =================================================
 
 Final assignment from the Interaction Programming course at KTH
